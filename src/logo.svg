@@ -1,0 +1,10 @@
+
+var MovieEntry = () => (
+  <div>
+  	<p>
+  	{movie[0].title}
+  	</p>
+  </div>
+ );
+
+window.MovieEntry = MovieEntry;
