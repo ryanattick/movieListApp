@@ -14,23 +14,29 @@ var movies = [
 // document.getElementById("input-box").value
 
 
-
-
-
-
 class App extends Component {
-  constuctor(props) {
-    // super(props);
+  constructor(props) {
+    super(props);
     this.state = {
       value: "Search here!"
     }
   }
 
-  handleSearchClick (video) {
-    // event.preventDefault();
+  handleSearchClick (event) {
+    // e.preventDefault();
     // console.log('clicked!')
-    console.log(video);
+    // console.log(event.target.value);
+    this.setState({
+      value: event.target.value
+    })
+    console.log(this.state.value)
   };
+
+  clearValue () {
+    this.setState({
+      value: ''
+    })
+  }
 
   render() {
     return (
@@ -38,7 +44,7 @@ class App extends Component {
         <div className="App-header">
           <h2>Movie List</h2>
         <div>
-          <Search handleSearchClick={this.handleSearchClick.bind(this)}/>
+          <Search clearValue={this.clearValue.bind(this)}value={this.state.value}handleSearchClick={this.handleSearchClick.bind(this)}/>
         </div>
         </div>
   {movies.map((movie, index) => (
@@ -59,10 +65,10 @@ var MovieListEntry = (props) => (
 var Search = (props) => (
   <div>
   <form>
-    <input id="input-box" ></input>
-    <button id="submit-button" 
-    onClick={() => {props.handleSearchClick(document.getElementById('input-box').value)}}
-    >Submit</button>
+    <input id="input" value={props.value} onClick={() => props.clearValue()}onChange={(event) => {props.handleSearchClick(event)}}></input>
+    <p id="submit-button" 
+    onClick={(event) => {props.handleSearchClick(event)}}
+    >Submit</p>
   </form>
   </div>
 );
